@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title>Context Menu test</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript">
+      function isRightClick(event){
+        return event.which === 3; // from http://stackoverflow.com/questions/1646851/jquery-right-click-event
+      }
+
+      $(document).ready(function(){
+        
+        // disable browser context menu, from http://roshanbh.com.np/2008/06/disable-right-click-context-menu.html
+        document.getElementById("body").oncontextmenu = function(){ return false; } 
+
+        $(document).mousedown(function(e){ 
+
+          if (isRightClick(e)) {
+            var newPosition = { "top" : e.pageY, "left" : e.pageX };
+            $( "#context-menu" ).css( newPosition ).slideToggle();
+          }
+
+        });
+      });
+    </script>
+  </head>
+  <body id="body">
+    </h1>Right click to open the context menu</h1>
+
+    <div id="context-menu" style="display: none; position: absolute; top: 0; left: 0; z-index: 9999; border: 1px dashed gray">
+      <a href="http://plus.google.com">Google+</a>
+      <br />
+      <a href="http://facebook.com">Facebook</a>
+    </div>
+  </body>
+</html>
